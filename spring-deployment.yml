@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: jhooq-springboot
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: jhooq-springboot
@@ -16,10 +16,10 @@ spec:
         - name: springboot
           image: suneeth1918/my-eks-flaskapp:flask-demo
           ports:
-            - containerPort: 8080
+            - containerPort: 5000
           env:
             - name: PORT
-              value: "8080"
+              value: "5000"
 ---
 apiVersion: v1
 kind: Service
@@ -29,6 +29,6 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 5000
   selector:
     app: jhooq-springboot
